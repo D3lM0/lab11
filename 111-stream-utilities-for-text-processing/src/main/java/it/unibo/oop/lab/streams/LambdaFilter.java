@@ -42,6 +42,7 @@ public final class LambdaFilter extends JFrame {
          * Commands.
          */
         IDENTITY("No modifications", Function.identity());
+        
 
         private final String commandName;
         private final Function<String, String> fun;
