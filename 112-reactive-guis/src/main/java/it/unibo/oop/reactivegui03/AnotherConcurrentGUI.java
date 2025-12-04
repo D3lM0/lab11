@@ -117,9 +117,9 @@ public final class AnotherConcurrentGUI extends JFrame {
                 Thread.sleep(DEAD_TIME);
                 if (!target.isStopped()) {
                     this.target.stopCounting();
-                    AnotherConcurrentGUI.this.up.setEnabled(false);
-                    AnotherConcurrentGUI.this.down.setEnabled(false);
-                    AnotherConcurrentGUI.this.stop.setEnabled(false);
+                    SwingUtilities.invokeLater(() -> AnotherConcurrentGUI.this.up.setEnabled(false));
+                    SwingUtilities.invokeLater(() -> AnotherConcurrentGUI.this.down.setEnabled(false));
+                    SwingUtilities.invokeLater(() -> AnotherConcurrentGUI.this.stop.setEnabled(false));
                 }
             } catch (final InterruptedException e) {
                 LOGGER.error(e.getMessage(), e);
