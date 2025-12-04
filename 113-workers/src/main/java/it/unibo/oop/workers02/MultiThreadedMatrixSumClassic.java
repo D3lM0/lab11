@@ -3,16 +3,24 @@ package it.unibo.oop.workers02;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * MultiThreaded calculator on matrix.
+ */
 public final class MultiThreadedMatrixSumClassic implements SumMatrix {
 
     private final int nThread;
 
+    /**
+     * Build a MultiThreaded calculator.
+     * 
+     * @param nWorker n° of threads
+     */
     public MultiThreadedMatrixSumClassic(final int nWorker) {
         this.nThread = nWorker;
     }
 
     @Override
-    public double sum(double[][] matrix) {
+    public double sum(final double[][] matrix) {
         final int rows = matrix.length;
         final int size = rows % nThread + rows / nThread;
 
@@ -46,13 +54,13 @@ public final class MultiThreadedMatrixSumClassic implements SumMatrix {
         /**
          * Build a new Worker.
          * 
-         * @param matrix
-         * @param startRow
-         * @param nRows
+         * @param matrix   matrix on which calculate the sum
+         * @param startRow start row of each worker
+         * @param nRows    total rows
          */
-        public Worker(final double[][] matrix, final int startRow, final int nRows) {
+        Worker(final double[][] matrix, final int startRow, final int nRows) {
             super();
-            this.doubleMatrix = matrix;
+            this.doubleMatrix = matrix; // NOPMD
             this.startRow = startRow;
             this.nRows = nRows;
         }
