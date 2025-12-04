@@ -24,6 +24,9 @@ public final class ConcurrentGUI extends JFrame {
     private static final Logger LOGGER = LoggerFactory.getLogger(ConcurrentGUI.class);
     private final JLabel display = new JLabel();
 
+    /**
+     * Builds a ConcurrentGUI.
+     */
     public ConcurrentGUI() {
         super();
         JFrameUtil.dimensionJFrame(this);
@@ -57,7 +60,7 @@ public final class ConcurrentGUI extends JFrame {
 
         private volatile boolean stop;
         private volatile boolean up = true;
-        private int counter = 0;
+        private int counter;
 
         @Override
         public void run() {

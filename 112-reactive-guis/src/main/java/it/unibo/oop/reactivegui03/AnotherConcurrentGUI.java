@@ -27,6 +27,9 @@ public final class AnotherConcurrentGUI extends JFrame {
     private final JButton down = new JButton("down");
     private final JButton stop = new JButton("stop");
 
+    /**
+     * Builds an AnotherConcurrentGUI.
+     */
     public AnotherConcurrentGUI() {
         super();
         JFrameUtil.dimensionJFrame(this);
@@ -60,7 +63,7 @@ public final class AnotherConcurrentGUI extends JFrame {
     private final class Agent implements Runnable {
 
         private static final int STOP_PERIOD = 100;
-        private int counter = 0;
+        private int counter;
         private volatile boolean up = true;
         private volatile boolean stop;
 
@@ -75,7 +78,7 @@ public final class AnotherConcurrentGUI extends JFrame {
                     } else {
                         this.counter--;
                     }
-                    Thread.sleep(Agent.STOP_PERIOD);
+                    Thread.sleep(STOP_PERIOD);
                 } catch (InvocationTargetException | InterruptedException e) {
                     LOGGER.error(e.getMessage(), e);
                 }
@@ -101,7 +104,7 @@ public final class AnotherConcurrentGUI extends JFrame {
 
     private final class StopAgent implements Runnable {
 
-        private static final int DEAD_TIME = 10000;
+        private static final int DEAD_TIME = 10_000;
         private final Agent target;
 
         StopAgent(final Agent target) {
@@ -111,14 +114,14 @@ public final class AnotherConcurrentGUI extends JFrame {
         @Override
         public void run() {
             try {
-                Thread.sleep(StopAgent.DEAD_TIME);
+                Thread.sleep(DEAD_TIME);
                 if (!target.isStopped()) {
                     this.target.stopCounting();
                     AnotherConcurrentGUI.this.up.setEnabled(false);
                     AnotherConcurrentGUI.this.down.setEnabled(false);
                     AnotherConcurrentGUI.this.stop.setEnabled(false);
                 }
-            } catch (InterruptedException e) {
+            } catch (final InterruptedException e) {
                 LOGGER.error(e.getMessage(), e);
             }
         }
