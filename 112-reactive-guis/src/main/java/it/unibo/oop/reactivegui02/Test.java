@@ -36,7 +36,7 @@ public final class Test {
      * Main method to start the GUI.
      *
      * @param args
-     *            possible args to pass (not used)
+     *             possible args to pass (not used)
      */
     public static void main(final String... args) {
         new ConcurrentGUI();
